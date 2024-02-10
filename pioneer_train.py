@@ -84,8 +84,8 @@ def eval_policy(epoch,policy):
         for t in range(observations.shape[1]):
             state = observations[0:1,t:t+1,:]
             action,_ , _ = policy.forward(state, h, c)
-            action=action.numpy().flatten()
-            test_model_predictions.append(action)
+            # action=action.numpy().flatten()
+            test_model_predictions.append(action[0,0,0])
 
         test_model_predictions = np.asarray(test_model_predictions, dtype=np.float32)
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     act_dim = 1
     hidden_size = 128
     batch_size = 25
-    save_seq = 1
+    save_seq = 20
     eval_seq = 20
     seed = 0
     

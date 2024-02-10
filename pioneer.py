@@ -238,9 +238,13 @@ class Pioneer(nn.Module):
             q1 = self.critic.q1(state, action)
             ind = q1.argmax(1)
             
-            out=action[0,ind].cpu().data.numpy().flatten()
-            out=torch.tensor(out)
-            #out=action[0,ind]
+            # out=action[0,ind].cpu().data.numpy().flatten()
+            # out=torch.tensor(out)
+            out = action[0,ind]
+            out = out.unsqueeze(0)
+            out = torch.cat((out,out),dim=-1)
+            # print("shape:",out.shape)
+
         return out, h, c
     
 
